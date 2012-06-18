@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>ɹ ɐ ɥ ʞ ǝ ɥ s </title><link href="http://shon.github.com" rel="alternate"></link><link href="http://shon.github.com/feeds/all.atom.xml" rel="self"></link><id>http://shon.github.com</id><updated>2012-04-04T19:38:00+05:30</updated><entry><title>Choosing MV(V)C library for Cowspa</title><link href="http://shon.github.com/2012/04/choosing-mvvc-library-for-cowspa.html" rel="alternate"></link><updated>2012-04-04T19:38:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2012/04/choosing-mvvc-library-for-cowspa.html</id><summary type="html">&lt;p&gt;In the initial phase of this open source project &lt;a class="reference external" href="https://github.com/Cowoop/cowspa3"&gt;cowspa&lt;/a&gt; developed by
+&lt;a class="reference external" href="http://cowoop.net/"&gt;Cowoop&lt;/a&gt;, we had chosen knockout.js as important client side component.
+However during the implementation team bowed to the delivery pressure
+and couldn't get a chance to learn, explore and use knockout or any
+other MVC library. Certainly a mistake! Ultimately we have to paid the
+price of having to maintain really complex pure jquery based bug-prone
+codebase. However at this stage, I decided to rectify this and started
+looking for different client side templating and MVC libraries.
+Essentially the library that binds the templates to data and can
+auto-update as the data changes. I was stunned by choice of
+libraries/frameworks available.
+There are just too many of them. Ones I liked are&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://knockoutjs.com/"&gt;knockout.js&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://angularjs.org/"&gt;angular.js&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://emberjs.com/"&gt;Ember.js&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://agilityjs.com/"&gt;Agility&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://kmalakoff.github.com/knockback/"&gt;knockback&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ember is perhaps the best one even according to this &lt;a class="reference external" href="http://codebrief.com/2012/01/the-top-10-javascript-mvc-frameworks-reviewed/"&gt;post&lt;/a&gt;. Angular is
+very capable and is sheer magic. And well there are many more like
+excellent backbone.js.
+We finally narrowed down two options: Knockout and Agility.
+Agility, I liked most, mainly because of it's clear syntax and looked
+like producing very maintainable code. So it was really tempting to go
+for it. But for us at this point of time knockout scored better at
+mainly with it's project maturity (age). Agility is at 0.1.2 at this
+moment and knockout 2.0.0 and hence knockout enjoys much bigger
+community.&lt;/p&gt;
+&lt;p&gt;So while we go ahead now with knockout I will certainly keep an eye on
+agility's development would love to find an excuse to use it.&lt;/p&gt;
+</summary><category term="javascript"></category><category term="agility"></category><category term="knockout.js"></category><category term="cowspa"></category><category term="cowoop"></category><category term="mvc"></category></entry><entry><title>Configuring your ubuntu for faster internet access</title><link href="http://shon.github.com/2011/02/configuring-your-ubuntu-for-faster-internet-access.html" rel="alternate"></link><updated>2011-02-04T15:57:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2011/02/configuring-your-ubuntu-for-faster-internet-access.html</id><summary type="html">&lt;p&gt;While there is a lot already written here my quick howto&lt;/p&gt;
+&lt;pre class="code bash literal-block"&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo bash
+&lt;span class="c"&gt;# apt-get install dnsmasq squid
+# echo &amp;quot;listen-address=127.0.0.1&amp;quot; &amp;gt;&amp;gt; /etc/dnsmasq.conf
+# echo &amp;quot;no-dhcp-interface=&amp;quot; &amp;gt;&amp;gt; /etc/dnsmasq.conf
+# vi /etc/dhcp3/dhclient.conf
+# # ^ uncomment line #prepend domain-name-servers 127.0.0.1;
+# vi /etc/resolv.conf  # Add nameserver 127.0.0.1
+# /etc/init.d/dnsmasq restart
+# vi /etc/squid/squid.conf
+&lt;/span&gt;
+http_port 3128
+visible_hostname localhost
+
+acl all src 0.0.0.0/0.0.0.0
+
+cache_effective_user proxy
+cache_effective_group proxy
+
+http_access allow all
+icp_access allow all
+
+positive_dns_ttl 1 month
+negative_dns_ttl 1 minute
+httpd_accel_port 80
+httpd_accel_with_proxy on
+httpd_accel_uses_host_header on
+
+cache_dir ufs /cache 400 16 256
+cache_store_log none
+
+
+&lt;span class="c"&gt;# mkdir /cache # I have this dir on reizerfs partition
+# chown proxy.proxy /cache
+&lt;/span&gt;
+&lt;span class="c"&gt;# /etc/init.d/squid restart&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;Configure your browser to use 127.0.0.1:8080.
+Also read detailed dnsmasq setup article
+&lt;a class="reference external" href="http://ubuntu.wordpress.com/2006/08/02/local-dns-cache-for-faster-browsing/"&gt;http://ubuntu.wordpress.com/2006/08/02/local-dns-cache-for-faster-browsing/&lt;/a&gt;&lt;/p&gt;
+</summary><category term="linux"></category><category term="squid"></category><category term="dnsmasq"></category><category term="proxy"></category></entry><entry><title>Redis patterns | search</title><link href="http://shon.github.com/2010/11/redis-patterns-search.html" rel="alternate"></link><updated>2010-11-26T02:55:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2010/11/redis-patterns-search.html</id><summary type="html">&lt;div class="section" id="problem"&gt;
+&lt;h2&gt;Problem&lt;/h2&gt;
+&lt;p&gt;You want to implement search against user objects stored in redis using
+Python. Something like querying for all user ids whose username begins
+with &amp;quot;an&amp;quot;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="solution"&gt;
+&lt;h2&gt;Solution&lt;/h2&gt;
+&lt;p&gt;Here we have user objects stored in as hashes with &amp;quot;user:obj:&amp;quot; as
+prefix.&lt;/p&gt;
+&lt;p&gt;For example&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+user:obj:3955 {id: 3955, username: 'John', ..}
+&lt;/pre&gt;
+&lt;p&gt;We need some extra data structures to support our search i.e. (search
+user objects where username begins with given phrase. So search for
+&lt;tt class="docutils literal"&gt;jo&lt;/tt&gt; should match John, Joe and so on. We will use sorted sets of all
+usernames and will assign every element a score. This score is a float
+and helps us in finding the matching words.&lt;/p&gt;
+&lt;p&gt;Some scores for eg.&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+a -&amp;gt; 0.097ab -&amp;gt; 0.097098ac -&amp;gt; 0.097099bc -&amp;gt; 0.098099
+&lt;/pre&gt;
+&lt;p&gt;So for above four string if we find strings that has score that is =&amp;gt;
+0.097 and &amp;lt; 0.098, we find all strings that begins with 'a'&lt;/p&gt;
+&lt;p&gt;Code&lt;/p&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="c"&gt;# Search usernames that begins with given phrase&lt;/span&gt;
+&lt;span class="c"&gt;#&lt;/span&gt;
+&lt;span class="c"&gt;# usernames: (username1, username2, ..)&lt;/span&gt;
+&lt;span class="c"&gt;# userscore:&amp;lt;username&amp;gt;: float&lt;/span&gt;
+&lt;span class="c"&gt;# user:obj: { id: int, username: string }&lt;/span&gt;
+
+&lt;span class="n"&gt;usernames_zset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;usernames&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;my_ord&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;%03d&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="nb"&gt;ord&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;'0.'&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;''&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;my_ord&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_next_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;s_score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;part0&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;s_score&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;s_score&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;next_c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;part1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;s_score&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;part0&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;next_c&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;part1&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_user&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c"&gt;# The User Object&lt;/span&gt;
+    &lt;span class="n"&gt;uid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;incr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'user:idgen'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'user:obj:&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s"&gt;'&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;uid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'id'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c"&gt;# datastructures necessary to implement search&lt;/span&gt;
+    &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zadd&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;usernames_zset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_test_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;test_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'abc'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'ab'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'shekhar'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'shon'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'sh'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; \
+        &lt;span class="s"&gt;'zxcvbnmasdfghjklqwertyuiop0'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'zxcvbnmasdfghjklqwertyuiop00'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;test_data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;add_user&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;redis&lt;/span&gt;
+&lt;span class="n"&gt;conn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;redis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Redis&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;add_test_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# conn.zrange(usernames_zset, 0, -1) # Whole set&lt;/span&gt;
+&lt;span class="n"&gt;a_score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;b_score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_next_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;'Find all users starting with &amp;quot;a&amp;quot; -&amp;gt; INF'&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zrangebyscore&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;usernames_zset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a_score&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'INF'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;'Find all users starting with &amp;quot;a&amp;quot;'&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zrangebyscore&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;usernames_zset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a_score&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b_score&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;'Find all users starting with &amp;quot;a&amp;quot; limit 2'&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zrangebyscore&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;usernames_zset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a_score&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'INF'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;
+&lt;!-- &lt;script src="https://gist.github.com/716212.js"&gt; &lt;/script&gt; --&gt;
+&lt;/div&gt;
+&lt;div class="section" id="discussion"&gt;
+&lt;h2&gt;Discussion&lt;/h2&gt;
+&lt;p&gt;This to demonstrate simple redis pattern and using it in Python.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="see-also"&gt;
+&lt;h2&gt;See Also&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://code.google.com/p/redis/wiki/ZrangebyscoreCommand"&gt;ZrangebyscoreCommand&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There are already some good writeups on related topics.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://playnice.ly/blog/2010/05/24/redis-multi-field-searching-and-filtering/"&gt;playnicely&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://antirez.com/post/autocomplete-with-redis.html"&gt;autocomplete&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</summary><category term="python"></category><category term="autocomplete"></category><category term="redis"></category></entry><entry><title>All izz well?</title><link href="http://shon.github.com/2010/11/all-izz-well.html" rel="alternate"></link><updated>2010-11-26T02:40:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2010/11/all-izz-well.html</id><summary type="html">&lt;p&gt;Surely one of the most over-hyped film. What was good? Aamir, Music and
+the first half laughs. Post interval it becomes a predictable, boring,
+idiot bollywood movie.&lt;/p&gt;
+&lt;p&gt;Munnabhai s were certainly better. I would say watch it on TV or atleast
+don’t pay 3 times higher than usual for tickets like we did. 4 and half
+stars by critic hmmmm..&lt;/p&gt;
+</summary><category term="3 idiots"></category><category term="review"></category><category term="movie"></category></entry><entry><title>Reliance Netconnect Broadband+ on Linux</title><link href="http://shon.github.com/2010/11/reliance-netconnect-broadband-on-linux.html" rel="alternate"></link><updated>2010-11-26T02:38:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2010/11/reliance-netconnect-broadband-on-linux.html</id><summary type="html">&lt;ul class="simple"&gt;
+&lt;li&gt;It works. Make sure while purchasing you inform them that you use Linux&lt;/li&gt;
+&lt;li&gt;It’s fast and reliable in Pashan, Pune area&lt;/li&gt;
+&lt;li&gt;Below config worked for me on Ubuntu 9.10 AND 10.04&lt;/li&gt;
+&lt;li&gt;There are Linux drivers on the CD but I could not get it working on Ubuntu 9.10.&lt;/li&gt;
+&lt;li&gt;For activation, I had to use Windows :(&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="literal-block"&gt;
+sudo apt-get install usb-modeswitch wvdial
+
+vi /etc/wvdial
+
+[Dialer Defaults]
+Phone = #777
+Password =
+Username =
+Baud = 460800
+Stupid Mode = 1
+New PPPD = 1
+Tonline = 0
+Init1 = ATZ
+Init2 = ATQ0 V1 E1 S0=0 &amp;amp;C1 &amp;amp;D2 +FCLASS=0
+Modem Type = Analog Modem
+Baud = 460800
+Modem = /dev/ttyUSB0
+ISDN = 0
+&lt;/pre&gt;
+</summary><category term="reliance"></category><category term="linux"></category><category term="broadband"></category></entry><entry><title>xfce and ubuntuone</title><link href="http://shon.github.com/2010/11/xfce-and-ubuntuone.html" rel="alternate"></link><updated>2010-11-26T02:36:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2010/11/xfce-and-ubuntuone.html</id><summary type="html">&lt;p&gt;I do like Ubuntu Netbook Remix’s UI. However with 10.04 it’s just gone
+so unstable for me.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;After login when system prompts for keyring secret, UNR environment
+crashes and drops to gnome. I have to relogin if I need UNR env.&lt;/li&gt;
+&lt;li&gt;After I removed a few packages it could not just start gnome panel
+causing a great inconvenience. I guess this is due to Evolution
+integration with latest Ubuntu. Mail client I like and use is
+&lt;a class="reference external" href="http://www.mozillamessaging.com/en-US/thunderbird/"&gt;Thunderbird&lt;/a&gt;. I cant switch to Evolution.&lt;/li&gt;
+&lt;li&gt;Initially after 10.04 release it was damn slow to respond, so had to
+do some work around to get it to acceptable speed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Considering all that I decided to switch to &lt;a class="reference external" href="http://www.xfce.org/about/screenshots"&gt;Xfce&lt;/a&gt;. It just worked like
+charm. But now I also use (and like :) ) &lt;a class="reference external" href="https://one.ubuntu.com/"&gt;UbuntuOne&lt;/a&gt; service for my
+backup. UbuntuOne is not integrated for XFCE. Also you cant do
+everything from UbuntuOne’s cli.&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+u1sdtool -q; killall ubuntuone-login; u1sdtool -c # configuration
+u1sdtool --create-folder ~/my_data # add folders you want to be synced
+u1sdtool --list-folders
+u1sdtool --current-transfers
+&lt;/pre&gt;
+&lt;p&gt;For more details you might want to check &lt;a class="reference external" href="https://wiki.ubuntu.com/UbuntuOne/FAQ#How%20do%20I%20add%20my%20computer?"&gt;Ubuntu One wiki&lt;/a&gt; .&lt;/p&gt;
+</summary><category term="ubuntuone"></category><category term="xfce"></category><category term="ubuntu"></category></entry><entry><title>Unicode</title><link href="http://shon.github.com/2009/03/unicode.html" rel="alternate"></link><updated>2009-03-28T09:35:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2009/03/unicode.html</id><summary type="html">&lt;p&gt;Pulling your hairs over some i18n bug or you fix it but are not able to
+explain what. This is little help in getting fair idea about
+unicode/codecs/encoding/decoding etc.&lt;/p&gt;
+&lt;p&gt;Quick tips:&lt;/p&gt;
+&lt;ol class="loweralpha simple"&gt;
+&lt;li&gt;It does not make sense to have a string without knowing what encoding it uses.&lt;/li&gt;
+&lt;li&gt;Utf-8 is a way of storing string of Unicode code points.&lt;/li&gt;
+&lt;li&gt;Encoding: Transforming a unicode object into a sequence of bytes&lt;/li&gt;
+&lt;li&gt;Decoding: Recreating the unicode object from the sequence of bytes is known as decoding. There are many different methods for how this transformation can be done (these methods are also called encodings).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now&lt;/p&gt;
+&lt;p&gt;Must Read&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.joelonsoftware.com/articles/Unicode.html"&gt;http://www.joelonsoftware.com/articles/Unicode.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://stackoverflow.com/questions/447107/whats-the-difference-between-encode-decode-python-2-x"&gt;http://stackoverflow.com/questions/447107/whats-the-difference-between-encode-decode-python-2-x&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Continue reading&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://farmdev.com/talks/unicode/"&gt;http://farmdev.com/talks/unicode/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://diveintopython.org/xml_processing/unicode.html"&gt;http://diveintopython.org/xml_processing/unicode.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://stackoverflow.com/questions/440320/unicode-vs-str-decode-for-a-utf8-encoded-byte-string-python-2-x"&gt;http://stackoverflow.com/questions/440320/unicode-vs-str-decode-for-a-utf8-encoded-byte-string-python-2-x&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</summary><category term="utf-8"></category><category term="unicode"></category><category term="python"></category></entry><entry><title>Youtube flash videos to DivX (on Linux)</title><link href="http://shon.github.com/2009/03/youtube-flash-videos-to-divx-on-linux.html" rel="alternate"></link><updated>2009-03-15T08:57:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2009/03/youtube-flash-videos-to-divx-on-linux.html</id><summary type="html">&lt;p&gt;This how I convert flash I usually use &lt;a class="reference external" href="https://addons.mozilla.org/en-US/firefox/addon/3006"&gt;Firefox VideoHelper Addon&lt;/a&gt; to download youtube videos.  To play them on my Philips DVP5986K DVD player from USB drive, I need to convert it to DivX.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;mencoder &lt;span class="pre"&gt;/home/shon/Desktop/file-864260998.flv&lt;/span&gt; &lt;span class="pre"&gt;-ovc&lt;/span&gt; lavc &lt;span class="pre"&gt;-oac&lt;/span&gt; mp3lame &lt;span class="pre"&gt;-ffourcc&lt;/span&gt; DX50 &lt;span class="pre"&gt;-o&lt;/span&gt; out.avi&lt;/tt&gt;&lt;/p&gt;
+</summary><category term="mencoder"></category><category term="linux"></category><category term="youtube"></category></entry><entry><title>LinkedIn backlash</title><link href="http://shon.github.com/2009/03/linkedin-backlash.html" rel="alternate"></link><updated>2009-03-14T10:43:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2009/03/linkedin-backlash.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.linkedin.com/"&gt;Linkedin&lt;/a&gt; is one of the few sites that has certainly impressed me with
+it's clever design. I would rate it very highly for professional
+networking. It has one very popular feature &amp;quot;recommendations&amp;quot;. Well
+while I am not against recommending or get recommended by, as I have
+done both in past. But I see people who
+think that more and more people they have in their list (no matter how
+they know well each other professionally) and more recommendations they
+have received (mostly by requesting others) would make their prospects
+better. Umm oh, I wonder why are they are madly behind this. I receive a
+quite a few requests often. Some morning you check your emails and you see
+that some colleague in your company 2 years ago sends you a mail with
+subject &amp;quot;can you endorse me?&amp;quot;. And the email says something
+similar.&lt;/p&gt;
+&lt;p&gt;Dear ,&lt;/p&gt;
+&lt;p&gt;I'm sending this to ask you for a brief recommendation of my work that I
+can include in my LinkedIn profile. If you have any questions, let me
+know.&lt;/p&gt;
+&lt;p&gt;Thanks in advance for helping me out.
+-&lt;/p&gt;
+&lt;p&gt;Now this above guy could be someone I don't know that well how well
+he/she is skilled. But now I can't deny the request so in a day or two I
+would look at some other recommendations available for my other LinkedIn
+friends, copy some matter and send what is requested for. He happily
+accepts and send me a nice Thank you email. I see people who worked
+completely unrelated departments and has probably no ability to judge
+other's work, go praising out of good relationships. May be what should
+happen on Orkut testimonials or somewhere similar.
+Does these people who have tens and hundreds of people in network and so
+many recommendations have no work other than hopping the jobs and
+sending such requests.&lt;/p&gt;
+&lt;p&gt;Next time I interview a guy with many endorsements , I would probably
+more cautious hiring him.&lt;/p&gt;
+</summary><category term="professional"></category><category term="LinkedIn"></category><category term="networking"></category></entry><entry><title>Tata Indicom USB Modem on Linux</title><link href="http://shon.github.com/2009/03/tata-indicom-usb-modem-on-linux.html" rel="alternate"></link><updated>2009-03-14T10:41:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2009/03/tata-indicom-usb-modem-on-linux.html</id><summary type="html">&lt;p&gt;cat /etc/wvdial.conf:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+[Dialer Defaults]
+Init1 = ATZ
+Init2 = ATQ0 V1 E1 S0=0 &amp;amp;C1 &amp;amp;D2 +FCLASS=0
+Modem Type = USB Modem
+Baud = 460800
+New PPPD = yes
+Modem = /dev/ttyACM0
+ISDN = 0
+Stupid mode = 1
+Phone = #777
+Password = internet
+Username = internet
+&lt;/pre&gt;
+&lt;p&gt;Don't understand above. Um ok but I am too lazy to explain.&lt;/p&gt;
+</summary><category term="indicom"></category><category term="modem"></category><category term="linux"></category><category term="tata"></category><category term="usb"></category></entry><entry><title>My open source projects</title><link href="http://shon.github.com/2009/02/my-open-source-projects.html" rel="alternate"></link><updated>2009-02-17T07:26:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2009/02/my-open-source-projects.html</id><summary type="html">&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://code.google.com/p/syncer/"&gt;Syncer&lt;/a&gt;: A event daemon based on Pyro.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://code.google.com/p/stockie/"&gt;Stockie&lt;/a&gt;: A personal portfolio manager for an Investor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Will soon write more about these projects.&lt;/p&gt;
+</summary><category term="stockie"></category><category term="python"></category><category term="code"></category><category term="google"></category><category term="syncer"></category><category term="opensource"></category></entry><entry><title>Qemu networking setup</title><link href="http://shon.github.com/2009/02/qemu-networking-setup.html" rel="alternate"></link><updated>2009-02-16T11:25:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2009/02/qemu-networking-setup.html</id><summary type="html">&lt;pre class="literal-block"&gt;
+------------        ----------
+|           |      |  Guest  |
+| Host  ----+------+-----    |
+|      |    | Hub  |     |   |
+|      |tap0|      |tap1 |   |
+|      |-----+-----+-----|   |
+| eth0      |      |         |
+|   |       |      |         |
+----+-------       ----------
+ |
+(Internet)
+
+Host
+* Add a hub
+# vde_switch  -x -d -tap tap0 -tap tap1
+* Assign ip to host's nic
+# ifconfig tap0 192.168.1.1
+* Setup ip forwarding
+Modify /etc/sysctl.conf
+net.ipv4.ip_forward=1
+* Setup masquerading
+# iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+* Fire qemu
+# vdeqemu -m 1024 -localtime /vm//jos_8.04_01/jos_8.04_01.img
+
+Guest
+# ifconfig eth0 192.168.1.2
+# route add default gw 192.168.1.1
+# vi /etc/resolv.com
+# ping google.com
+&lt;/pre&gt;
+</summary><category term="vde"></category><category term="qemu"></category><category term="tap"></category><category term="networking"></category></entry><entry><title>Using DOT language to produce Flowchart</title><link href="http://shon.github.com/2008/12/using-dot-language-to-produce-flowchart.html" rel="alternate"></link><updated>2008-12-09T10:01:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2008/12/using-dot-language-to-produce-flowchart.html</id><summary type="html">&lt;p&gt;better than struggling with the graphical tools.&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+shon&amp;#64;ubuntu:~$ cat test.dot
+
+digraph FlowChart {
+
+ node [
+         fontname = &amp;quot;Bitstream Vera Sans&amp;quot;
+         fontsize = 8
+         shape = &amp;quot;record&amp;quot;
+     ]
+
+ edge [
+         fontname = &amp;quot;Bitstream Vera Sans&amp;quot;
+         fontsize = 8
+         fontcolor = &amp;quot;Red&amp;quot;
+     ]
+
+// all blocks
+greet [label=&amp;quot;Hello, techie&amp;quot;, shape=&amp;quot;oval&amp;quot;]
+which_os [label=&amp;quot;What OS do you use?&amp;quot; shape=&amp;quot;diamond&amp;quot;]
+like_me [label=&amp;quot;Great, me too!&amp;quot;, shape=&amp;quot;oval&amp;quot;]
+which_browser [label=&amp;quot;You must be using firefox&amp;quot;, shape=&amp;quot;diamond&amp;quot;]
+ff [label=&amp;quot;Cool&amp;quot;, shape=&amp;quot;oval&amp;quot;]
+bye [label=&amp;quot;Bye&amp;quot;, shape=&amp;quot;oval&amp;quot;]
+
+// relations
+greet -&amp;gt; which_os
+which_os -&amp;gt; like_me [label=&amp;quot;I use Linux&amp;quot;]
+which_os -&amp;gt; which_browser [label=&amp;quot;I use Windows&amp;quot;]
+which_browser -&amp;gt; ff [label=&amp;quot;Right&amp;quot;]
+which_browser -&amp;gt; bye [label=&amp;quot;what firefox?&amp;quot;]
+}
+
+shon&amp;#64;ubuntu:~$ dot test.dot -Tpng -o test.png &amp;amp;&amp;amp; eog test.png
+&lt;/pre&gt;
+</summary><category term="graphviz"></category><category term="generating"></category><category term="dot"></category><category term="flowchart"></category></entry><entry><title>Contract verification in Python</title><link href="http://shon.github.com/2008/04/contract-verification-in-python.html" rel="alternate"></link><updated>2008-04-17T06:10:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2008/04/contract-verification-in-python.html</id><summary type="html">&lt;pre class="code python literal-block"&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;zope.interface.verify&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ITest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;zope&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interface&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Interface&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arg1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="k"&gt;pass&lt;/span&gt;
+   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;bar&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt; &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Test&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+   &lt;span class="n"&gt;zope&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interface&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;implements&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ITest&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Test2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+   &lt;span class="n"&gt;zope&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interface&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;implements&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ITest&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;arg1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Test3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+   &lt;span class="n"&gt;zope&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interface&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;implements&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ITest&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;arg1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="k"&gt;pass&lt;/span&gt;
+   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;bar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;cls&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Test2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Test3&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+   &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+       &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;zope&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interface&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;verify&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;verifyClass&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ITest&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+           &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;OK: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt; correctly implements &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ITest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;Exception&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;err&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+       &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Error detected with &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;'s implementation: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;err&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;
+</summary><category term="python"></category><category term="programming"></category><category term="zope"></category><category term="zinterfaces"></category></entry><entry><title>Getting older, getting better and better!</title><link href="http://shon.github.com/2008/04/getting-older-getting-better-and-better.html" rel="alternate"></link><updated>2008-04-17T06:09:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2008/04/getting-older-getting-better-and-better.html</id><summary type="html">&lt;p&gt;Python programming is joy. I was stuck on python 2.3 at my work for long
+and could not really get chance to explore later versions. Now that I
+got the opportunity doing re-architecture of the product I started
+exploring these. I am more than excited looking at deque, groupby,
+defaultdict and much more ... Also on top of it there exist excellent
+python softwares like &lt;a class="reference external" href="http://twistedmatrix.com"&gt;twisted,&lt;/a&gt; &lt;a class="reference external" href="http://sqlalchemy.org"&gt;sqlalchemy&lt;/a&gt;, &lt;a class="reference external" href="http://turbogears.org"&gt;turbogears&lt;/a&gt; makes it
+even more cool.&lt;/p&gt;
+&lt;p&gt;It's little pity that the language is stll somewhat less recognized than
+others. Or there are more hyped languages exist.&lt;/p&gt;
+</summary><category term="python"></category><category term="programming"></category></entry></feed>
