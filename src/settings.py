@@ -15,7 +15,7 @@ THEME = 'notmyidea'
 
 # The folder ``images`` should be copied into the folder ``static`` when
 # generating the output.
-STATIC_PATHS = ['images', 'category/About me.html']
+STATIC_PATHS = ['images']
 
 # See http://pelican.notmyidea.org/en/latest/settings.html#timezone
 TIMEZONE = 'Asia/Calcutta'
@@ -39,6 +39,9 @@ DEFAULT_PAGINATION = 10
 REVERSE_ARCHIVE_ORDER = True
 DISPLAY_PAGES_ON_MENU = ['About me.html']
 DISPLAY_PAGES_ON_MENU = True
+#MENUITEMS = (('About me', 'http://flavors.me/shon'),)
+
+SOCIAL = (('twitter', 'http://twitter.com/shon_'), ('github', 'http://github.com/shon'), ('facebook', 'http://facebook.com/shon0'))
 
 TYPOGRIFY = True
 
