@@ -297,10 +297,12 @@ Username = internet
 &lt;/pre&gt;
 &lt;p&gt;Don't understand above. Um ok but I am too lazy to explain.&lt;/p&gt;
 </summary><category term="indicom"></category><category term="modem"></category><category term="linux"></category><category term="tata"></category><category term="usb"></category></entry><entry><title>My open source projects</title><link href="http://shon.github.com/2009/02/my-open-source-projects.html" rel="alternate"></link><updated>2009-02-17T07:26:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2009/02/my-open-source-projects.html</id><summary type="html">&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/Cowoop/cowspa3"&gt;Cowoop&lt;/a&gt;: Open source application to manage coworking business.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://pypi.python.org/pypi/httpagentparser"&gt;httpagentparser&lt;/a&gt;: Python HTTP Agent Parser.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://pypi.python.org/pypi/sphc"&gt;SPHC&lt;/a&gt;: Simple Pythonic HTML Creator.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://code.google.com/p/syncer/"&gt;Syncer&lt;/a&gt;: A event daemon based on Pyro.&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://code.google.com/p/stockie/"&gt;Stockie&lt;/a&gt;: A personal portfolio manager for an Investor&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Will soon write more about these projects.&lt;/p&gt;
 </summary><category term="stockie"></category><category term="python"></category><category term="code"></category><category term="google"></category><category term="syncer"></category><category term="opensource"></category></entry><entry><title>Qemu networking setup</title><link href="http://shon.github.com/2009/02/qemu-networking-setup.html" rel="alternate"></link><updated>2009-02-16T11:25:00+05:30</updated><author><name>Shekhar Tiwatne</name></author><id>http://shon.github.com/2009/02/qemu-networking-setup.html</id><summary type="html">&lt;pre class="literal-block"&gt;
 ------------        ----------
 |           |      |  Guest  |
