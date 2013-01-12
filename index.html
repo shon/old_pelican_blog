@@ -4,9 +4,8 @@
         <title>ɹ ɐ ɥ ʞ ǝ ɥ s </title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
-        <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="ɹ ɐ ɥ ʞ ǝ ɥ s  ATOM Feed" />
-        
-
+                <link href="http://shon.github.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="ɹ ɐ ɥ ʞ ǝ ɥ s  Atom Feed" />
+                
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
@@ -20,98 +19,115 @@
 </head>
 
 <body id="index" class="home">
-
         <header id="banner" class="body">
-                <h1><a href=".">ɹ ɐ ɥ ʞ ǝ ɥ s  </a></h1>
+                <h1><a href="./">ɹ ɐ ɥ ʞ ǝ ɥ s  </a></h1>
                 <nav><ul>
-                
-                    <li><a href="http://shon.github.com/archives.html">Archives</a></li>
-                
-                
-                
-                    <li><a href="./pages/about-me.html">About me</a></li>
-                
-                
-                
-                    <li ><a href="./category/Blog.html">Blog</a></li>
-                
-                </ul></nav>
+                                    <li><a href="http://shon.github.com/archives.html">Archives</a></li>
+                                                                    <li><a href="./2012/06/pages/about-me.html">About&nbsp;me</a></li>
+                                                                    <li ><a href="./category/blog.html">Blog</a></li>
+                                </ul></nav>
         </header><!-- /#banner -->
                 
-
             
 
-        
-        
-            <aside id="featured" class="body">
+                            <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./2012/04/choosing-mvvc-library-for-cowspa.html">Choosing MV(V)C library for Cowspa</a></h1> 
+                    <h1 class="entry-title"><a href="./2013/01/jspn-rpc.html"><span class="caps">JSPN</span>-<span class="caps">RPC</span></a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-01-13T06:10:00">
+                Sun 13 January 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/shekhar-tiwatne.html">Shekhar Tiwatne</a>
+        </address>
+        <p>In <a href="./category/blog.html">Blog</a>. </p>
+<p>tags: <a href="./tag/python.html">python</a><a href="./tag/programming.html">programming</a><a href="./tag/jspnrpc.html">jspnrpc</a><a href="./tag/design.html">design</a></p>
+</footer><!-- /.post-info --><p><a class="reference external" href="http://json-rpc.org/"><span class="caps">JSON</span>-<span class="caps">RPC</span></a> has got much less attention than it deserves. It is so elegant and simple. Our experience of working on <span class="caps">JSON</span>-<span class="caps">RPC</span> was&nbsp;plesant.</p>
+<p>For uninitiated <span class="caps">JSON</span>-<span class="caps">RPC</span> is lightweight remote procedure call protocol similar to <span class="caps">XML</span>-<span class="caps">RPC</span>. I find it incredibly useful in building easy to maintain&nbsp;applications.</p>
+<p>We effectively used <span class="caps">JSONRPC</span> in our project <a class="reference external" href="http://cowoop.net/">Cowoop</a> to make it easy to debug&nbsp;application.</p>
+<p>It is often seen that unless it is an open source application, in the design phase very little attention is paid towards maintainablity of the application. With many no so clearly seperated layers it makes it increasingly difficult to debug. This makes bug fixing painful and no fun process for those who are working on it. And further these in most cases are not the architects who designed the application. Architect is either moved on to design some other project or is working on next&nbsp;release.</p>
+<p>Lets directly jump to example code. So here is my python&nbsp;function.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="mi">3</span>
+</pre></div>
+<p>Project exposes above function <cite>add</cite> using <span class="caps">JSON</span>-<span class="caps">RPC</span>. We use <a class="reference external" href="http://flask.pocoo.org/">Flask</a> + <a class="reference external" href="http://packages.python.org/jsonrpc2">jsonrpc2</a> to serve <span class="caps">JSONRPC</span> over&nbsp;http.</p>
+<p>Let us see how does jquery <span class="caps">JSONRPC</span> plugin calls this&nbsp;<span class="caps">API</span>.</p>
+<img alt="src/images/001.png" src="src/images/001.png" />
+<p>Result</p>
+<img alt="src/images/003.png" src="src/images/003.png" />
+<p>jspnrpc function that you see in above screenshot is part of our js client library. Really it is a a few lines wrapper on top of <a class="reference external" href="https://github.com/datagraph/jquery-jsonrpc">jquery jspnrpc plugin</a> function&nbsp;jsonRPC.request()</p>
+<p>Do you think <span class="caps">JSONRPC2</span> is fairly successful in helping create a maintainable&nbsp;application?</p>
+<div class="section" id="challenges">
+<h2>Challenges</h2>
+<div class="section" id="authentication">
+<h3>Authentication</h3>
+<p>There is no word in <span class="caps">JSONRPC2</span> specification about Authentication yet (not a complaint) . But I think it is necessary for further success of <span class="caps">JSONRPC</span>. It&#8217;s possible to use http auth but not many would prefer it so I see people implementing two type of&nbsp;solutions.</p>
+<div class="section" id="authentication-using-cookies">
+<h4>Authentication | Using&nbsp;cookies</h4>
+<p>Session id is kept in authcookie and sent/validated with every http&nbsp;request.</p>
+</div>
+<div class="section" id="authentication-using-special-parameters-in-rpc-call">
+<h4>Authentication | Using special parameters in rpc&nbsp;call</h4>
+<p>Session id is passed as special parameter in every rpc call. For eg. above add function may be invoked like&nbsp;below</p>
+<div class="highlight"><pre><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">_session</span><span class="o">=</span><span class="s">&#39;somesessionid&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="authentication-ideal">
+<h4>Authentication |&nbsp;Ideal</h4>
+<pre class="literal-block">
+--&gt; { &quot;method&quot;: &quot;login&quot;, &quot;params&quot;: {&quot;username&quot;: &quot;me&quot;, &quot;password&quot;: &quot;secret&quot;}, &quot;id&quot;: 1}
+&lt;-- { &quot;result&quot;: &quot;somesessionid&quot;, &quot;error&quot;: null, &quot;id&quot;: 1}
+--&gt; { &quot;method&quot;: &quot;echo&quot;, &quot;params&quot;: [&quot;Hello protected JSON-RPC&quot;], &quot;id&quot;: 1, &quot;session&quot;: &quot;somesessionid&quot;}
+&lt;-- { &quot;result&quot;: &quot;Hello protected JSON-RPC&quot;, &quot;error&quot;: null, &quot;id&quot;: 1}
+</pre>
+</div>
+</div>
+</div>
+<p>There are <a href="./2013/01/jspn-rpc.html#disqus_thread">comments</a>.</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="./2012/04/choosing-mvcmvvm-library-for-cowspa.html" rel="bookmark"
+                           title="Permalink to Choosing MVC(MVVM) library for Cowspa">Choosing <span class="caps">MVC</span>(<span class="caps">MVVM</span>) library for&nbsp;Cowspa</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2012-04-04T19:38:00">
                 Wed 04 April 2012
         </abbr>
 
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/Shekhar Tiwatne.html">Shekhar Tiwatne</a>
+                <address class="vcard author">
+                By <a class="url fn" href="./author/shekhar-tiwatne.html">Shekhar Tiwatne</a>
         </address>
-        
-<p>In <a href="./category/Blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/javascript.html">javascript</a><a href="./tag/agility.html">agility</a><a href="./tag/knockout.js.html">knockout.js</a><a href="./tag/cowspa.html">cowspa</a><a href="./tag/cowoop.html">cowoop</a><a href="./tag/mvc.html">mvc</a></p>
-
-
-</footer><!-- /.post-info --><p>In the initial phase of this open source project <a class="reference external" href="https://github.com/Cowoop/cowspa3">cowspa</a> developed by
+        <p>In <a href="./category/blog.html">Blog</a>. </p>
+<p>tags: <a href="./tag/javascript.html">javascript</a><a href="./tag/agility.html">agility</a><a href="./tag/knockoutjs.html">knockout.js</a><a href="./tag/cowspa.html">cowspa</a><a href="./tag/cowoop.html">cowoop</a><a href="./tag/mvc.html">mvc</a></p>
+</footer><!-- /.post-info -->                <p>In the initial phase of this open source project <a class="reference external" href="https://github.com/Cowoop/cowspa3">cowspa</a> developed by
 <a class="reference external" href="http://cowoop.net/">Cowoop</a>, we had chosen knockout.js as important client side component.
 However during the implementation team bowed to the delivery pressure
-and couldn't get a chance to learn, explore and use knockout or any
-other MVC library. Certainly a mistake! Ultimately we have to paid the
-price of having to maintain really complex pure jquery based bug-prone
-codebase. However at this stage, I decided to rectify this and started
-looking for different client side templating and MVC libraries.
-Essentially the library that binds the templates to data and can
-auto-update as the data changes. I was stunned by choice of
-libraries/frameworks available.
-There are just too many of them. Ones I liked are</p>
-<ul class="simple">
-<li><a class="reference external" href="http://knockoutjs.com/">knockout.js</a></li>
-<li><a class="reference external" href="http://angularjs.org/">angular.js</a></li>
-<li><a class="reference external" href="http://emberjs.com/">Ember.js</a></li>
-<li><a class="reference external" href="http://agilityjs.com/">Agility</a></li>
-<li><a class="reference external" href="http://kmalakoff.github.com/knockback/">knockback</a></li>
-</ul>
-<p>Ember is perhaps the best one even according to this <a class="reference external" href="http://codebrief.com/2012/01/the-top-10-javascript-mvc-frameworks-reviewed/">post</a>. Angular is
-very capable and is sheer magic. And well there are many more like
-excellent backbone.js.
-We finally narrowed down two options: Knockout and Agility.
-Agility, I liked most, mainly because of it's clear syntax and looked
-like producing very maintainable code. So it was really tempting to go
-for it. But for us at this point of time knockout scored better at
-mainly with it's project maturity (age). Agility is at 0.1.2 at this
-moment and knockout 2.0.0 and hence knockout enjoys much bigger
-community.</p>
-<p>So while we go ahead now with knockout I will certainly keep an eye on
-agility's development would love to find an excuse to use it.</p>
-<p>There are <a href="./2012/04/choosing-mvvc-library-for-cowspa.html#disqus_thread">comments</a>.</p>
-                </article>
-                
-            </aside><!-- /#featured -->
-            
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                        <ol id="posts-list" class="hfeed">
-            
-        
-        
-        
-        
+and couldn&#8217;t get a chance to learn, explore and use knockout or any
+other <span class="caps">MVC</span> library ...</p>
+                <a class="readmore" href="./2012/04/choosing-mvcmvvm-library-for-cowspa.html">read more</a>
+                <p>There are <a href="./2012/04/choosing-mvcmvvm-library-for-cowspa.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
-        
-         
-            
-            <li><article class="hentry">    
+                 
+                        <li><article class="hentry">    
                 <header>
-                        <h1><a href="./2011/02/configuring-your-ubuntu-for-faster-internet-access.html" rel="bookmark" title="Permalink to Configuring your ubuntu for faster internet access">Configuring your ubuntu for faster internet access</a></h1>
+                    <h1><a href="./2011/02/configuring-your-ubuntu-for-faster-internet-access.html" rel="bookmark"
+                           title="Permalink to Configuring your ubuntu for faster internet access">Configuring your ubuntu for faster internet&nbsp;access</a></h1>
                 </header>
                 
                 <div class="entry-content">
@@ -120,39 +136,29 @@ agility's development would love to find an excuse to use it.</p>
                 Fri 04 February 2011
         </abbr>
 
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/Shekhar Tiwatne.html">Shekhar Tiwatne</a>
+                <address class="vcard author">
+                By <a class="url fn" href="./author/shekhar-tiwatne.html">Shekhar Tiwatne</a>
         </address>
-        
-<p>In <a href="./category/Blog.html">Blog</a>. </p>
+        <p>In <a href="./category/blog.html">Blog</a>. </p>
 <p>tags: <a href="./tag/linux.html">linux</a><a href="./tag/squid.html">squid</a><a href="./tag/dnsmasq.html">dnsmasq</a><a href="./tag/proxy.html">proxy</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>While there is a lot already written here my quick howto</p>
-<pre class="code bash literal-block">
-<span class="nv">$ </span>sudo bash
-<span class="c"># apt-get install dnsmasq squid
-# echo &quot;listen-address=127.0.0.1&quot; &gt;&gt; /etc/dnsmasq.conf
-# echo &quot;no-dhcp-interface=&quot; &gt;&gt; /etc/dnsmasq.conf
-# vi /etc/dhcp3/dhclient.conf
-# # ^ uncomment line #prepend domain-name-servers 127.0.0.1;
-# vi /etc/resolv.conf  # Add nameserver ...</span></pre>
+</footer><!-- /.post-info -->                <p>While there is a lot already written here my quick&nbsp;howto</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo bash
+<span class="c"># apt-get install dnsmasq squid</span>
+<span class="c"># echo &quot;listen-address=127.0.0.1&quot; &gt;&gt; /etc/dnsmasq.conf</span>
+<span class="c"># echo &quot;no-dhcp-interface=&quot; &gt;&gt; /etc/dnsmasq.conf</span>
+<span class="c"># vi /etc/dhcp3/dhclient.conf</span>
+<span class="c"># # ^ uncomment line #prepend domain-name-servers 127.0.0.1;</span>
+<span class="c"># vi /etc/resolv.conf  # Add nameserver ...</span></pre></div>
                 <a class="readmore" href="./2011/02/configuring-your-ubuntu-for-faster-internet-access.html">read more</a>
-                <p>There are <a href="./2011/02/configuring-your-ubuntu-for-faster-internet-access.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
+                <p>There are <a href="./2011/02/configuring-your-ubuntu-for-faster-internet-access.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-        
-        
-        
+                            
 
-        
-         
-            
-            <li><article class="hentry">    
+                 
+                        <li><article class="hentry">    
                 <header>
-                        <h1><a href="./2010/11/redis-patterns-search.html" rel="bookmark" title="Permalink to Redis patterns | search">Redis patterns | search</a></h1>
+                    <h1><a href="./2010/11/redis-patterns-search.html" rel="bookmark"
+                           title="Permalink to Redis patterns | search">Redis patterns |&nbsp;search</a></h1>
                 </header>
                 
                 <div class="entry-content">
@@ -161,354 +167,52 @@ agility's development would love to find an excuse to use it.</p>
                 Fri 26 November 2010
         </abbr>
 
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/Shekhar Tiwatne.html">Shekhar Tiwatne</a>
+                <address class="vcard author">
+                By <a class="url fn" href="./author/shekhar-tiwatne.html">Shekhar Tiwatne</a>
         </address>
-        
-<p>In <a href="./category/Blog.html">Blog</a>. </p>
+        <p>In <a href="./category/blog.html">Blog</a>. </p>
 <p>tags: <a href="./tag/python.html">python</a><a href="./tag/autocomplete.html">autocomplete</a><a href="./tag/redis.html">redis</a></p>
-
-
-</footer><!-- /.post-info -->
-                <div class="section" id="problem">
+</footer><!-- /.post-info -->                <div class="section" id="problem">
 <h2>Problem</h2>
 <p>You want to implement search against user objects stored in redis using
 Python. Something like querying for all user ids whose username begins
-with &quot;an&quot;.</p>
+with&nbsp;&#8220;an&#8221;.</p>
 </div>
 <div class="section" id="solution">
 <h2>Solution</h2>
-<p>Here we have user objects stored in as hashes with &quot;user:obj:&quot; as
-prefix.</p>
-<p>For example</p>
+<p>Here we have user objects stored in as hashes with &#8220;user:obj:&#8221; as&nbsp;prefix.</p>
+<p>For&nbsp;example</p>
 <pre class="literal-block">
 user:obj:3955 {id: 3955, username: 'John ...</pre></div>
                 <a class="readmore" href="./2010/11/redis-patterns-search.html">read more</a>
-                <p>There are <a href="./2010/11/redis-patterns-search.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
+                <p>There are <a href="./2010/11/redis-patterns-search.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-        
-        
-        
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                        <h1><a href="./2010/11/all-izz-well.html" rel="bookmark" title="Permalink to All izz well?">All izz well?</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2010-11-26T02:40:00">
-                Fri 26 November 2010
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/Shekhar Tiwatne.html">Shekhar Tiwatne</a>
-        </address>
-        
-<p>In <a href="./category/Blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/3 idiots.html">3 idiots</a><a href="./tag/review.html">review</a><a href="./tag/movie.html">movie</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>Surely one of the most over-hyped film. What was good? Aamir, Music and
-the first half laughs. Post interval it becomes a predictable, boring,
-idiot bollywood movie.</p>
-<p>Munnabhai s were certainly better. I would say watch it on TV or atleast
-don’t pay 3 times higher than usual for ...</p>
-                <a class="readmore" href="./2010/11/all-izz-well.html">read more</a>
-                <p>There are <a href="./2010/11/all-izz-well.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-        
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                        <h1><a href="./2010/11/reliance-netconnect-broadband-on-linux.html" rel="bookmark" title="Permalink to Reliance Netconnect Broadband+ on Linux">Reliance Netconnect Broadband+ on Linux</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2010-11-26T02:38:00">
-                Fri 26 November 2010
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/Shekhar Tiwatne.html">Shekhar Tiwatne</a>
-        </address>
-        
-<p>In <a href="./category/Blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/reliance.html">reliance</a><a href="./tag/linux.html">linux</a><a href="./tag/broadband.html">broadband</a></p>
-
-
-</footer><!-- /.post-info -->
-                <ul class="simple">
-<li>It works. Make sure while purchasing you inform them that you use Linux</li>
-<li>It’s fast and reliable in Pashan, Pune area</li>
-<li>Below config worked for me on Ubuntu 9.10 AND 10.04</li>
-<li>There are Linux drivers on the CD but I could not get it working on Ubuntu ...</li></ul>
-                <a class="readmore" href="./2010/11/reliance-netconnect-broadband-on-linux.html">read more</a>
-                <p>There are <a href="./2010/11/reliance-netconnect-broadband-on-linux.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-        
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                        <h1><a href="./2010/11/xfce-and-ubuntuone.html" rel="bookmark" title="Permalink to xfce and ubuntuone">xfce and ubuntuone</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2010-11-26T02:36:00">
-                Fri 26 November 2010
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/Shekhar Tiwatne.html">Shekhar Tiwatne</a>
-        </address>
-        
-<p>In <a href="./category/Blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/ubuntuone.html">ubuntuone</a><a href="./tag/xfce.html">xfce</a><a href="./tag/ubuntu.html">ubuntu</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>I do like Ubuntu Netbook Remix’s UI. However with 10.04 it’s just gone
-so unstable for me.</p>
-<ul class="simple">
-<li>After login when system prompts for keyring secret, UNR environment
-crashes and drops to gnome. I have to relogin if I need UNR env.</li>
-<li>After I removed a few packages ...</li></ul>
-                <a class="readmore" href="./2010/11/xfce-and-ubuntuone.html">read more</a>
-                <p>There are <a href="./2010/11/xfce-and-ubuntuone.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-        
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                        <h1><a href="./2009/03/unicode.html" rel="bookmark" title="Permalink to Unicode">Unicode</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2009-03-28T09:35:00">
-                Sat 28 March 2009
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/Shekhar Tiwatne.html">Shekhar Tiwatne</a>
-        </address>
-        
-<p>In <a href="./category/Blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/utf-8.html">utf-8</a><a href="./tag/unicode.html">unicode</a><a href="./tag/python.html">python</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>Pulling your hairs over some i18n bug or you fix it but are not able to
-explain what. This is little help in getting fair idea about
-unicode/codecs/encoding/decoding etc.</p>
-<p>Quick tips:</p>
-<ol class="loweralpha simple">
-<li>It does not make sense to have a string without knowing what encoding it uses.</li>
-<li>Utf-8 ...</li></ol>
-                <a class="readmore" href="./2009/03/unicode.html">read more</a>
-                <p>There are <a href="./2009/03/unicode.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-        
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                        <h1><a href="./2009/03/youtube-flash-videos-to-divx-on-linux.html" rel="bookmark" title="Permalink to Youtube flash videos to DivX (on Linux)">Youtube flash videos to DivX (on Linux)</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2009-03-15T08:57:00">
-                Sun 15 March 2009
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/Shekhar Tiwatne.html">Shekhar Tiwatne</a>
-        </address>
-        
-<p>In <a href="./category/Blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/mencoder.html">mencoder</a><a href="./tag/linux.html">linux</a><a href="./tag/youtube.html">youtube</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>This how I convert flash I usually use <a class="reference external" href="https://addons.mozilla.org/en-US/firefox/addon/3006">Firefox VideoHelper Addon</a> to download youtube videos.  To play them on my Philips DVP5986K DVD player from USB drive, I need to convert it to DivX.</p>
-<p><tt class="docutils literal">mencoder <span class="pre">/home/shon/Desktop/file-864260998.flv</span> <span class="pre">-ovc</span> lavc <span class="pre">-oac</span> mp3lame <span class="pre">-ffourcc</span> DX50 <span class="pre">-o</span> out.avi</tt></p>
-
-                <a class="readmore" href="./2009/03/youtube-flash-videos-to-divx-on-linux.html">read more</a>
-                <p>There are <a href="./2009/03/youtube-flash-videos-to-divx-on-linux.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-        
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                        <h1><a href="./2009/03/linkedin-backlash.html" rel="bookmark" title="Permalink to LinkedIn backlash">LinkedIn backlash</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2009-03-14T10:43:00">
-                Sat 14 March 2009
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/Shekhar Tiwatne.html">Shekhar Tiwatne</a>
-        </address>
-        
-<p>In <a href="./category/Blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/professional.html">professional</a><a href="./tag/LinkedIn.html">LinkedIn</a><a href="./tag/networking.html">networking</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p><a class="reference external" href="http://www.linkedin.com/">Linkedin</a> is one of the few sites that has certainly impressed me with
-it's clever design. I would rate it very highly for professional
-networking. It has one very popular feature &quot;recommendations&quot;. Well
-while I am not against recommending or get recommended by, as I have
-done both in ...</p>
-                <a class="readmore" href="./2009/03/linkedin-backlash.html">read more</a>
-                <p>There are <a href="./2009/03/linkedin-backlash.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-        
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                        <h1><a href="./2009/03/tata-indicom-usb-modem-on-linux.html" rel="bookmark" title="Permalink to Tata Indicom USB Modem on Linux">Tata Indicom USB Modem on Linux</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2009-03-14T10:41:00">
-                Sat 14 March 2009
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/Shekhar Tiwatne.html">Shekhar Tiwatne</a>
-        </address>
-        
-<p>In <a href="./category/Blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/indicom.html">indicom</a><a href="./tag/modem.html">modem</a><a href="./tag/linux.html">linux</a><a href="./tag/tata.html">tata</a><a href="./tag/usb.html">usb</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>cat /etc/wvdial.conf:</p>
-<pre class="literal-block">
-[Dialer Defaults]
-Init1 = ATZ
-Init2 = ATQ0 V1 E1 S0=0 &amp;C1 &amp;D2 +FCLASS=0
-Modem Type = USB Modem
-Baud = 460800
-New PPPD = yes
-Modem = /dev/ttyACM0
-ISDN = 0
-Stupid mode = 1
-Phone = #777
-Password = internet
-Username = internet
-</pre>
-<p>Don't understand above. Um ok but I am ...</p>
-                <a class="readmore" href="./2009/03/tata-indicom-usb-modem-on-linux.html">read more</a>
-                <p>There are <a href="./2009/03/tata-indicom-usb-modem-on-linux.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-            
-<p class="paginator">
-    
-    Page 1 / 2
-    
-        <a href="./index2.html">&raquo;</a>
-    
-</p>
-
-        
-
-    
-    </ol><!-- /#posts-list -->
-    </section><!-- /#content -->
-
-
-
-        <section id="extras" class="body">
-        
-        
-                <div class="social">
+                            </ol><!-- /#posts-list -->
+                            <p class="paginator">
+        Page 1 / 4
+            <a href="./index2.html">&raquo;</a>
+    </p>
+                        </section><!-- /#content -->
+                    <section id="extras" class="body">
+                                <div class="social">
                         <h2>social</h2>
                         <ul>
-                            <li><a href="./feeds/all.atom.xml" rel="alternate">atom feed</a></li>
+                            <li><a href="http://shon.github.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
                             
-
-                        
-                            <li><a href="http://twitter.com/shon_">twitter</a></li>
-                        
-                            <li><a href="http://github.com/shon">github</a></li>
-                        
-                            <li><a href="http://facebook.com/shon0">facebook</a></li>
-                        
-                        </ul>
+                                                    <li><a href="http://twitter.com/shon_">twitter</a></li>
+                                                    <li><a href="http://github.com/shon">github</a></li>
+                                                    <li><a href="http://facebook.com/shon0">facebook</a></li>
+                                                </ul>
                 </div><!-- /.social -->
-        
-        </section><!-- /#extras -->
+                </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">
-                Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>, which takes great advantages of <a href="http://python.org">python</a>.
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
                 </address><!-- /#about -->
 
                 <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
         </footer><!-- /#contentinfo -->
-
-
-
 
 <script type="text/javascript">
     var disqus_shortname = 'shon-blog';
@@ -519,6 +223,5 @@ Username = internet
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>
-
 </body>
 </html>

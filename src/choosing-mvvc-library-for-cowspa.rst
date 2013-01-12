@@ -1,5 +1,5 @@
-Choosing MV(V)C library for Cowspa
-##################################
+Choosing MVC(MVVM) library for Cowspa
+#####################################
 :date: 2012-04-04 19:38
 :tags: javascript, agility, knockout.js, cowspa, cowoop, mvc
 

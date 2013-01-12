@@ -3,7 +3,7 @@ Contract verification in Python
 :date: 2008-04-17 06:10
 :tags: python, programming, zope, zinterfaces
 
-.. code:: python
+.. code-block:: python
 
     import zope.interface.verify
     

@@ -5,10 +5,10 @@ Using DOT language to produce Flowchart
 
 better than struggling with the graphical tools.
 
+$ cat test.dot
+
 ::
 
-    shon@ubuntu:~$ cat test.dot
-    
     digraph FlowChart {
     
      node [
@@ -39,4 +39,6 @@ better than struggling with the graphical tools.
     which_browser -> bye [label="what firefox?"]
     }
     
-    shon@ubuntu:~$ dot test.dot -Tpng -o test.png && eog test.png
+$ dot test.dot -Tpng -o test.png && eog test.png
+
+.. image:: src/images/002.png

@@ -40,7 +40,7 @@ So for above four string if we find strings that has score that is =>
 Code
 
 
-.. code:: python
+.. code-block:: python
 
     # Search usernames that begins with given phrase
     #

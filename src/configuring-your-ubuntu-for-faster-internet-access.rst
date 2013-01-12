@@ -5,7 +5,7 @@ Configuring your ubuntu for faster internet access
 
 While there is a lot already written here my quick howto 
 
-.. code:: bash
+.. code-block:: bash
 
     $ sudo bash
     # apt-get install dnsmasq squid
