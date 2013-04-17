@@ -47,7 +47,7 @@ DISPLAY_PAGES_ON_MENU = ['About me.html']
 DISPLAY_PAGES_ON_MENU = True
 #MENUITEMS = (('About me', 'http://flavors.me/shon'),)
 
-SOCIAL = (('twitter', 'http://twitter.com/shon_'), ('github', 'http://github.com/shon'), ('facebook', 'http://facebook.com/shon0'))
+SOCIAL = (('google-plus', 'https://plus.google.com/109841397231691349117'), ('github', 'http://github.com/shon'), ('twitter', 'http://twitter.com/shon_'), ('facebook', 'http://facebook.com/shon0'))
 
 TYPOGRIFY = True
 
