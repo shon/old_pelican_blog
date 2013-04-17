@@ -12,12 +12,8 @@ SITEURL = 'http://shon.github.com'
 # This can also be the absolute path to a theme that you downloaded
 # i.e. './themes/anothertheme/'
 THEME = 'sneakyidea'
-THEME = 'bootlex'
-THEME = 'dev-random'
-THEME = 'martyalchin'
-THEME = 'svbtle'
-THEME = 'subtle'
 THEME = 'notmyidea'
+#THEME = 'pelican-themes/notmyidea-cms'
 
 # The folder ``images`` should be copied into the folder ``static`` when
 # generating the output.

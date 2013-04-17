@@ -1,7 +1,7 @@
-JSPN-RPC
-###############################
+JSON-RPC
+########
 :date: 2013-01-13 06:10
-:tags: python, programming, jspnrpc, design
+:tags: python, programming, jsonrpc, design
 
 `JSON-RPC`_ protocol has got much less attention than it deserves. It is so elegant and simple. Our experience of working on JSON-RPC was plesant. 
 
@@ -31,7 +31,7 @@ Result
 
 .. image:: src/images/003.png
 
-jspnrpc function that you see in above screenshot is part of our js client library. Really it is a a few lines wrapper on top of `jquery jspnrpc plugin <https://github.com/datagraph/jquery-jsonrpc>`_ function jsonRPC.request()
+jsonrpc function that you see in above screenshot is part of our js client library. Really it is a a few lines wrapper on top of `jquery jsonrpc plugin <https://github.com/datagraph/jquery-jsonrpc>`_ function jsonRPC.request()
 
 Do you think JSONRPC2 is fairly successful in helping create a maintainable application?
 
