@@ -16,7 +16,7 @@ PLUGINS = ['html_rst_directive']
 # i.e. './themes/anothertheme/'
 THEME = 'sneakyidea'
 THEME = 'notmyidea'
-#THEME = 'pelican-themes/notmyidea-cms'
+THEME = 'pelican-themes/notmyidea-cms'
 
 # The folder ``images`` should be copied into the folder ``static`` when
 # generating the output.
@@ -27,7 +27,7 @@ TIMEZONE = 'Asia/Calcutta'
 
 # Pelican will take the ``Date`` metadata and put the articles into folders
 # like ``/posts/2012/02/`` when generating the output.
-ARTICLE_PERMALINK_STRUCTURE = '/%Y/%m/'
+# ARTICLE_PERMALINK_STRUCTURE = '/%Y/%m/'
 
 # I like to put everything into the category ``Blog``, which also appears on
 # the main menu. Tags will not appear on the menu.
@@ -40,7 +40,7 @@ MENUITEMS = (
 
 
 WITH_PAGINATION = True
-DEFAULT_PAGINATION = 4
+DEFAULT_PAGINATION = 5
 REVERSE_ARCHIVE_ORDER = True
 DISPLAY_PAGES_ON_MENU = ['About me.html']
 DISPLAY_PAGES_ON_MENU = True
