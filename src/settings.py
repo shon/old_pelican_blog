@@ -7,7 +7,10 @@ sys.setdefaultencoding('utf-8')
 
 AUTHOR = 'Shekhar Tiwatne'
 SITENAME = 'ɹ ɐ ɥ ʞ ǝ ɥ s '
-SITEURL = 'http://shon.github.com'
+SITEURL = 'http://shon.github.io'
+
+PLUGIN_PATH = 'pelican-plugins'
+PLUGINS = ['html_rst_directive']
 
 # This can also be the absolute path to a theme that you downloaded
 # i.e. './themes/anothertheme/'
